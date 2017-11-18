@@ -58,22 +58,11 @@ const request = (url) => {
  * @param {ItemsSearchResponse} response 
  * @returns 
  */
-const fetchCategoriesInformation = (response) => {
-    const _promiseArray = response.items.map(item => {
-        return new Promise((resolve, reject) => {
-            request(URLS.category.concat(item.category))
-                .then(resolve)
-                .catch(reject);
-        });
-    });
-
-    return Promise.all(_promiseArray).then(results => {
-        response.categories = results;
-        return response;
-    });
+const fetchCategoryInformation = (category) => {
+    request(URLS.category.concat(category));
 };
 
 exports.URLS = URLS;
 exports.request = request;
 exports.serializeItemsSearchResponse = serializeItemsSearchResponse;
-exports.fetchCategoriesInformation = fetchCategoriesInformation;
+exports.fetchCategoryInformation = fetchCategoryInformation;

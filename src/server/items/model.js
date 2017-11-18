@@ -66,11 +66,9 @@ class Item {
 class ItemsSearchResponse {
     constructor(json) {
         this.author = new Author('Miguel', 'Lattuada');
-        this.categories = [];
+        this.categories = this._getMostPopularCategory(json);
         this.items = this._constructItemsArray(json.results);
-
     }
-
     /**
      * Creates an array of Items
      * 
@@ -79,6 +77,22 @@ class ItemsSearchResponse {
      */
     _constructItemsArray(results) {
         return results.map(result => new Item(result));
+    }
+    /**
+     * Get category filter from response
+     * 
+     * @param {any} json 
+     * @returns 
+     * @memberof ItemsSearchResponse
+     */
+    _getMostPopularCategory(json) {
+        try {
+            const categoryFilter = json.filters.find(ft => ft.id === 'category'),
+                value = categoryFilter.values[0];
+            return value.path_from_root.map(path => path.name);
+        } catch (e) {
+            return [];
+        }
     }
 
     toJson() {

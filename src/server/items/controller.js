@@ -1,6 +1,6 @@
 const {
     serializeItemsSearchResponse,
-    fetchCategoriesInformation,
+    fetchCategoryInformation,
     request,
     URLS
 } = require('./utils');
@@ -17,7 +17,6 @@ function searchItems(req, res) {
     } = req.query;
     request(URLS.search.concat(q))
         .then(serializeItemsSearchResponse)
-        .then(fetchCategoriesInformation)
         .then(json => {
             res.json(json);
         }).catch(error => {
