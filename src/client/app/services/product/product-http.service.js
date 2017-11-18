@@ -1,6 +1,9 @@
 import {
     Product
 } from 'app/models/product.model';
+import {
+    URLS
+} from 'app/constants';
 
 export class ProductHTTPService {
     /**
@@ -12,7 +15,7 @@ export class ProductHTTPService {
      * @memberof ProductHTTPService
      */
     static getProducts(query) {
-        return fetch(`https://api.mercadolibre.com/sites/MLU/search?q=${query}`)
+        return fetch(URLS.API.search.concat(query))
             .then(ProductHTTPService.normalizeResponse)
             .then(ProductHTTPService.normalizeJson);
     }

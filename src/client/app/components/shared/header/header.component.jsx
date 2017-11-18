@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import template from './header.template';
 import { ProductHTTPService as ProductService } from 'app/services/product/product-http.service'
+import { URLS } from 'app/constants';
 
 class HeaderToWrap extends Component {
     constructor() {
@@ -21,7 +22,7 @@ class HeaderToWrap extends Component {
 
         /** @type {HTMLInputElement} */
         const input = searchForm.querySelector('input')
-        this.props.history.push(`/products?search=${input.value}`);
+        this.props.history.push(URLS.CLIENT.search.concat(input.value));
     }
 
     render() {

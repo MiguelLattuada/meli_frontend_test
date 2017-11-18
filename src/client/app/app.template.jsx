@@ -16,7 +16,7 @@ export default function () {
             <div className="main-content">
                 <Switch>
                     {/* <Route exact path='/' component={} /> */}
-                    <Route path='/products' component={Products} />
+                    <Route path='/items' component={Products} />
                     {/* <Route path='/items/:id' component={} /> */}
                 </Switch>
             </div>
