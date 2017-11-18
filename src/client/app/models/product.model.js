@@ -3,12 +3,15 @@ import {
 } from 'app/constants';
 
 export class Product {
+    get normalizedPrice() {
+        return CurrencyMap[this.price.currency] + this.price.decimals;
+    }
+
     constructor(objectDefinition) {
         this.id = objectDefinition.id
         this.title = objectDefinition.title;
         this.price = objectDefinition.price;
-        this.thumbnail = objectDefinition.thumbnail;
-        this.currency = CurrencyMap[objectDefinition.currency_id];
+        this.picture = objectDefinition.picture;
     }
 }
 

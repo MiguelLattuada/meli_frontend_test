@@ -41,7 +41,7 @@ export class ProductHTTPService {
     static normalizeJson(json) {
         return new Promise((resolve, reject) => {
             try {
-                resolve(json.results.map(result => new Product(result)));
+                resolve(json.items.map(result => new Product(result)));
             } catch (e) {
                 reject('Could not normaliize json response. ' + e);
             }
