@@ -1,0 +1,29 @@
+.seach-box-component {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: white;
+    border-radius: 4px;
+    .search-box-input {
+        flex-grow: 1;
+        color: #333;
+        font-size: 16px;
+        padding: 10px 15px;
+        border: none;
+        background: none;
+        outline: none;
+    }
+    .search-box-icon-button {
+        border: none;
+        outline: none;
+        background: #eee;
+        width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        img {
+            width: 18px;
+        }
+    }
+}

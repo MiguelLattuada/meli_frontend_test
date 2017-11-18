@@ -1,0 +1,9 @@
+.app-component {
+    display: grid;
+    grid-template-columns: repeat(12, [col-start] 1fr);
+    grid-gap: 16px;
+    .main-content {
+        grid-column-start: 2;
+        grid-column-end: 12;
+    }
+}
