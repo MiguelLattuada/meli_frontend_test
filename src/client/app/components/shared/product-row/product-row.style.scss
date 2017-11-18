@@ -22,7 +22,11 @@
             margin-bottom: 32px;
             font-size: 24px;
             font-weight: normal;
-            color: #333
+            color: #333;
+            .free-shipping {
+                width: 18px;
+                margin-left: 5px;
+            }
         }
         p {
             font-size: 18px;
