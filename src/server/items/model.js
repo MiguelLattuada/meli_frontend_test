@@ -112,7 +112,31 @@ class ItemDetailResponse {
     }
 }
 /**
- * Response
+ * Item details response error
+ * 
+ * @class ItemDetailResponseError
+ */
+class ItemDetailResponseError {
+    constructor(error) {
+        this.status = error.status;
+        this.message = error.message;
+        this.error = error.error;
+    }
+    toJson() {
+        const {
+            status,
+            message,
+            error
+        } = this;
+        return {
+            status,
+            message,
+            error
+        };
+    }
+}
+/**
+ * Item search response
  * 
  * @class ItemsSearchResponse
  */
@@ -162,3 +186,4 @@ exports.Item = Item;
 exports.ItemDetail = ItemDetail;
 exports.ItemDetailResponse = ItemDetailResponse;
 exports.ItemsSearchResponse = ItemsSearchResponse;
+exports.ItemDetailResponseError = ItemDetailResponseError;

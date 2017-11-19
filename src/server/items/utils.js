@@ -1,7 +1,8 @@
 const https = require('https'),
     {
         ItemsSearchResponse,
-        ItemDetailResponse
+        ItemDetailResponse,
+        ItemDetailResponseError
     } = require('./model');
 
 // ML urls
@@ -44,6 +45,9 @@ const serializeItemsSearchResponse = (json) => {
  * @returns 
  */
 const serializeItemDetailResponse = (json) => {
+    if (json.error) {
+        return _serializeTo(json, ItemDetailResponseError);
+    }
     return _serializeTo(json, ItemDetailResponse);
 };
 /**
@@ -80,6 +84,8 @@ const request = (url) => {
  * @returns 
  */
 const fetchCategoryInformation = (itemDetail) => {
+    if (itemDetail instanceof ItemDetailResponseError) return itemDetail;
+
     return request(URLS.category.concat(itemDetail.item.category)).then(categoryResult => {
         itemDetail.item.category = categoryResult;
         return itemDetail;
@@ -92,6 +98,8 @@ const fetchCategoryInformation = (itemDetail) => {
  * @returns 
  */
 const fetchDescriptionInformation = (itemDetail) => {
+    if (itemDetail instanceof ItemDetailResponseError) return itemDetail;
+
     const url = URLS.description.replace(/:id/, itemDetail.item.id);
     return request(url).then(descResult => {
         itemDetail.item.description = descResult.text;
