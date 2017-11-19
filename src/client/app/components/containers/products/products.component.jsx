@@ -6,7 +6,7 @@ import { BreadcrumbService } from 'app/services/breadcrumb/breadcrumb.service';
 export class Products extends Component {
     constructor() {
         super();
-        this.state = { products: [] };
+        this.state = { products: [], fetched: false };
     }
 
     componentDidMount() {
@@ -27,7 +27,7 @@ export class Products extends Component {
         ProductService.getProducts(this.getSearchFromLocation()).then(result => {
 
             this.setState((prevState, props) => {
-                return { products: result.items };
+                return { products: result.items, fetched: true };
             });
 
             BreadcrumbService.instance.breadcrumb = result.categories;
