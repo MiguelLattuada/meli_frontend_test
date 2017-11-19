@@ -59,6 +59,53 @@ class Item {
     }
 }
 /**
+ * Item details
+ * 
+ * @class ItemDetail
+ * @extends {Item}
+ */
+class ItemDetail extends Item {
+    constructor(json) {
+        json.installments = {};
+        super(json);
+        this.price = {
+            currency: json.currency_id,
+            decimals: json.price
+        }
+        this.description = json.description;
+        this.sold_quantity = json.sold_quantity;
+    }
+
+    toJson() {
+        const _result = super.toJson(),
+            {
+                description,
+                sold_quantity
+            } = this;
+        return Object.assign({
+            description,
+            sold_quantity
+        }, _result);
+    }
+}
+/**
+ * Item detail response
+ * 
+ * @class ItemDetailResponse
+ */
+class ItemDetailResponse {
+    constructor(json) {
+        this.author = new Author('Miguel', 'Lattuada');
+        this.item = new ItemDetail(json);
+    }
+    toJson() {
+        return {
+            author: this.author.toJson(),
+            item: this.item.toJson()
+        };
+    }
+}
+/**
  * Response
  * 
  * @class ItemsSearchResponse
@@ -106,4 +153,6 @@ class ItemsSearchResponse {
 
 exports.Author = Author;
 exports.Item = Item;
+exports.ItemDetail = ItemDetail;
+exports.ItemDetailResponse = ItemDetailResponse;
 exports.ItemsSearchResponse = ItemsSearchResponse;

@@ -1,14 +1,33 @@
 const https = require('https'),
     {
-        ItemsSearchResponse
+        ItemsSearchResponse,
+        ItemDetailResponse
     } = require('./model');
 
 // ML urls
 const URLS = {
     search: 'https://api.mercadolibre.com/sites/MLA/search?limit=4&q=',
-    details: '',
-    category: 'https://api.mercadolibre.com/categories/'
+    category: 'https://api.mercadolibre.com/categories/',
+    details: 'https://api.mercadolibre.com/items/',
+    description: 'https://api.mercadolibre.com/items/:id/description'
 };
+/**
+ * Call a given constructor with data and return a promise
+ * 
+ * @param {any} json 
+ * @param {Function} fn 
+ * @returns {Promise}
+ */
+function _serializeTo(json, fn) {
+    const _localPromise = new Promise((resolve, reject) => {
+        try {
+            resolve(new fn(json));
+        } catch (e) {
+            reject(e);
+        }
+    });
+    return _localPromise;
+}
 /**
  * Convert json response into ItemSearchResponse
  * 
@@ -16,14 +35,16 @@ const URLS = {
  * @returns 
  */
 const serializeItemsSearchResponse = (json) => {
-    const _localPromise = new Promise((resolve, reject) => {
-        try {
-            resolve(new ItemsSearchResponse(json));
-        } catch (e) {
-            reject(e);
-        }
-    });
-    return _localPromise;
+    return _serializeTo(json, ItemsSearchResponse);
+};
+/**
+ * Convert json response into ItemDetailResponse
+ * 
+ * @param {any} json 
+ * @returns 
+ */
+const serializeItemDetailResponse = (json) => {
+    return _serializeTo(json, ItemDetailResponse);
 };
 /**
  * Make an http GET request through https node module
@@ -53,16 +74,34 @@ const request = (url) => {
     return _localPromise;
 };
 /**
- * Get information for categories.
+ * Get category info for items
  * 
- * @param {ItemsSearchResponse} response 
+ * @param {ItemDetailResponse} itemDetail 
  * @returns 
  */
-const fetchCategoryInformation = (category) => {
-    request(URLS.category.concat(category));
+const fetchCategoryInformation = (itemDetail) => {
+    return request(URLS.category.concat(itemDetail.item.category)).then(categoryResult => {
+        itemDetail.item.category = categoryResult;
+        return itemDetail;
+    });
+};
+/**
+ * Get full description for item.
+ * 
+ * @param {ItemDetailResponse} itemDetail 
+ * @returns 
+ */
+const fetchDescriptionInformation = (itemDetail) => {
+    const url = URLS.description.replace(/:id/, itemDetail.item.id);
+    return request(url).then(descResult => {
+        itemDetail.item.description = descResult.text;
+        return itemDetail;
+    });
 };
 
 exports.URLS = URLS;
 exports.request = request;
 exports.serializeItemsSearchResponse = serializeItemsSearchResponse;
+exports.serializeItemDetailResponse = serializeItemDetailResponse;
 exports.fetchCategoryInformation = fetchCategoryInformation;
+exports.fetchDescriptionInformation = fetchDescriptionInformation;
