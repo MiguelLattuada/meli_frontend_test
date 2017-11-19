@@ -56,7 +56,11 @@ export class ProductHTTPService {
     static normalizeJson(json, constructor) {
         return new Promise((resolve, reject) => {
             try {
-                resolve(new constructor(json));
+                if (json.error) {
+                    reject(json);
+                } else {
+                    resolve(new constructor(json));
+                }
             } catch (e) {
                 reject('Could not normaliize json response. ' + e);
             }
