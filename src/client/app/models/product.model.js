@@ -22,7 +22,7 @@ export class ProductListResponse {
     constructor(response) {
         this.author = response.author;
         this.categories = response.categories;
-        this.items = response.items.map(item => new Product(item));
+        this.items = response.items && response.items.map(item => new Product(item));
     }
 }
 
