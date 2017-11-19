@@ -16,6 +16,10 @@
   ],
   "author": "Miguel Lattuada",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MiguelLattuada/meli_frontend_test.git"
+  },
   "dependencies": {
     "express": "^4.16.2"
   },
