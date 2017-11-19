@@ -19,7 +19,7 @@ export class ProductDetail extends Component {
             this.setState((prevState, props) => {
                 return { product: result.item }
             });
-            // BreadcrumbService.instance.breadcrumb = result.item.category;
+            BreadcrumbService.instance.breadcrumb = result.item.category;
             console.log(result);
         }).catch(error => {
             console.error('Error while fetching details: ', error);
