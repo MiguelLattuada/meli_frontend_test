@@ -18,8 +18,8 @@ function searchItems(req, res) {
     } = req.query;
     request(URLS.search.concat(q))
         .then(serializeItemsSearchResponse)
-        .then(json => {
-            res.json(json);
+        .then(itemsSearchResponse => {
+            res.json(itemsSearchResponse.toJson());
         }).catch(error => {
             res.status(500).send(error);
         });
@@ -38,8 +38,8 @@ function getItem(req, res) {
         .then(serializeItemDetailResponse)
         .then(fetchDescriptionInformation)
         .then(fetchCategoryInformation)
-        .then(json => {
-            res.json(json);
+        .then(itemDetailResponse => {
+            res.json(itemDetailResponse.toJson());
         }).catch(error => {
             res.status(500).send(error);
         });

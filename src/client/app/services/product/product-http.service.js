@@ -52,10 +52,10 @@ export class ProductHTTPService {
      * @param {Function} constructor
      * @memberof ProductHTTPService
      */
-    static normalizeJson(json, fn) {
-        return new Promise((resolve, constructor) => {
+    static normalizeJson(json, constructor) {
+        return new Promise((resolve, reject) => {
             try {
-                resolve(new fn(json));
+                resolve(new constructor(json));
             } catch (e) {
                 reject('Could not normaliize json response. ' + e);
             }

@@ -10,11 +10,11 @@ export class Product {
     constructor(objectDefinition) {
         this.id = objectDefinition.id
         this.title = objectDefinition.title;
-        this.free_shipping = json.shipping.free_shipping;
+        this.free_shipping = objectDefinition.free_shipping;
         this.price = objectDefinition.price;
-        this.condition = json.condition;
+        this.condition = objectDefinition.condition;
         this.picture = objectDefinition.picture;
-        this.category = json.category_id;
+        this.category = objectDefinition.category_id;
     }
 }
 
