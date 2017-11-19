@@ -1,5 +1,5 @@
 const router = require('express').Router(),
     controller = require('./controller');
 // Routes
-router.get('/items', controller.searchItems);
+router.get('/', controller.searchItems);
 module.exports = router;

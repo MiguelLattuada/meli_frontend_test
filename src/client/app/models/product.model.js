@@ -15,4 +15,12 @@ export class Product {
     }
 }
 
+export class ProductListResponse {
+    constructor(response) {
+        this.author = response.author;
+        this.categories = response.categories;
+        this.items = response.items.map(item => new Product(item));
+    }
+}
+
 export class ProductDetails extends Product {}

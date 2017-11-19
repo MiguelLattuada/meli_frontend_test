@@ -5,7 +5,7 @@ const express = require('express'),
     public = path.resolve(__dirname, '../client/public');
 
 // Set routes
-app.use('/api', items);
+app.use('/api/items', items);
 app.use('/public', express.static(public));
 
 // Set port 

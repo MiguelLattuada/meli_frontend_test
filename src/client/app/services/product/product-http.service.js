@@ -1,5 +1,5 @@
 import {
-    Product
+    ProductListResponse
 } from 'app/models/product.model';
 import {
     URLS
@@ -41,7 +41,7 @@ export class ProductHTTPService {
     static normalizeJson(json) {
         return new Promise((resolve, reject) => {
             try {
-                resolve(json.items.map(result => new Product(result)));
+                resolve(new ProductListResponse(json));
             } catch (e) {
                 reject('Could not normaliize json response. ' + e);
             }

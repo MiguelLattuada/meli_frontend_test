@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import template from './products.template';
-import { ProductHTTPService as ProductService } from 'app/services/product/product-http.service'
+import { ProductHTTPService as ProductService } from 'app/services/product/product-http.service';
+import { BreadcrumbService } from 'app/services/breadcrumb/breadcrumb.service';
 
 export class Products extends Component {
     constructor() {
@@ -13,6 +14,7 @@ export class Products extends Component {
     }
 
     componentWillReceiveProps(props, context) {
+        // TODO: Check for location change before update product list
         this.updateStateProductList();
     }
 
@@ -23,9 +25,12 @@ export class Products extends Component {
      */
     updateStateProductList() {
         ProductService.getProducts(this.getSearchFromLocation()).then(result => {
+
             this.setState((prevState, props) => {
-                return { products: result }
+                return { products: result.items };
             });
+
+            BreadcrumbService.instance.breadcrumb = result.categories;
         }).catch(error => {
             console.error('Error while fetching results: ', error);
         });
