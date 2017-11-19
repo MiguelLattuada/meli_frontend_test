@@ -17,7 +17,6 @@ export class Breadcrumb extends Component {
      * @memberof Breadcrumb
      */
     updateBreadcrumbState(breadcrumb) {
-        console.log('updated!');
         this.setState((prevState, props) => {
             return { breadcrumb: breadcrumb }
         });

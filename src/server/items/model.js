@@ -65,6 +65,10 @@ class Item {
  * @extends {Item}
  */
 class ItemDetail extends Item {
+    get category_path() {
+        return this.category.path_from_root.map(path => path.name);
+    }
+
     constructor(json) {
         json.installments = {};
         super(json);
@@ -80,11 +84,13 @@ class ItemDetail extends Item {
         const _result = super.toJson(),
             {
                 description,
-                sold_quantity
+                sold_quantity,
+                category_path
             } = this;
         return Object.assign({
             description,
-            sold_quantity
+            sold_quantity,
+            category: category_path
         }, _result);
     }
 }

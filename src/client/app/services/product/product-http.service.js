@@ -1,5 +1,6 @@
 import {
-    ProductListResponse
+    ProductListResponse,
+    ProductDetailResponse
 } from 'app/models/product.model';
 import {
     URLS
@@ -11,13 +12,13 @@ export class ProductHTTPService {
      * 
      * @static
      * @param {string} id 
-     * @returns {Promise<>}
+     * @returns {Promise<ProductDetailResponse>}
      * @memberof ProductHTTPService
      */
     static getProductDetail(id) {
         return fetch(URLS.API.details.concat(id))
             .then(ProductHTTPService.normalizeResponse)
-            .then((json) => ProductHTTPService.normalizeJson(json, ProductListResponse));
+            .then((json) => ProductHTTPService.normalizeJson(json, ProductDetailResponse));
     }
     /**
      * Get a set of products based on search

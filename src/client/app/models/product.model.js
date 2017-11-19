@@ -4,7 +4,7 @@ import {
 
 export class Product {
     get normalizedPrice() {
-        return CurrencyMap[this.price.currency] + this.price.decimals;
+        return CurrencyMap[this.price.currency] + ' ' + this.price.decimals;
     }
 
     constructor(objectDefinition) {
@@ -29,8 +29,9 @@ export class ProductListResponse {
 export class ProductDetails extends Product {
     constructor(objectDefinition) {
         super(objectDefinition);
-        this.description = json.description;
-        this.sold_quantity = json.sold_quantity;
+        this.description = objectDefinition.description;
+        this.sold_quantity = objectDefinition.sold_quantity;
+        this.category = objectDefinition.category;
     }
 }
 
