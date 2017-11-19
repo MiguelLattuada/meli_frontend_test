@@ -8,6 +8,7 @@ import { Breadcrumb } from './components/shared/breadcrumb/breadcrumb.component'
 
 import { Products } from './components/containers/products/products.component';
 import { ProductDetail } from './components/containers/product-detail/product-detail.component';
+import { Home } from './components/containers/home/home.component';
 
 export default function () {
     return (
@@ -16,10 +17,9 @@ export default function () {
             <Breadcrumb />
             <div className="main-content">
                 <Switch>
-                    {/* <Route exact path='/' component={} /> */}
                     <Route exact path='/items' component={Products} />
                     <Route path='/items/:id' component={ProductDetail} />
-                    {/* <Route component={ProductDetail} /> */}
+                    <Route component={Home} />
                 </Switch>
             </div>
         </div>
