@@ -13,7 +13,7 @@ export default function () {
             </div>
             <div className="product-detail-description">
                 <h3>Descripción del producto</h3>
-                {this.state.product.description}
+                <div dangerouslySetInnerHTML={{ __html: this.state.product.description }}></div>
             </div>
         </div>
     )

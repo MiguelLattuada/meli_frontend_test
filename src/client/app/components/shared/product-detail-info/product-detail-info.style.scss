@@ -8,15 +8,25 @@
     h3 {
         color: #333;
         font-size: 24px;
-    }
-    h2 {
-        color: #333;
-        font-size: 46px;
-        margin: 32px 0;
         .free-shipping {
             width: 18px;
             margin-left: 5px;
         }
     }
-    button {}
+    h2 {
+        color: #333;
+        font-size: 46px;
+        margin: 32px 0;
+    }
+    button {
+        width: 100%;
+        padding: 10px 0;
+        font-size: 14px;
+        background: #3483fa;
+        color: white;
+        border: none;
+        outline: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 }
