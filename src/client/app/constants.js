@@ -11,7 +11,7 @@ const base_url = `${window.location.protocol}//${window.location.host}`;
 export const URLS = {
     API: {
         search: `${base_url}/api/items?q=`,
-        details: ''
+        details: `${base_url}/api/items/`
     },
     CLIENT: {
         search: '/items?search='

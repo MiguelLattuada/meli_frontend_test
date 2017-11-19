@@ -10,8 +10,11 @@ export class Product {
     constructor(objectDefinition) {
         this.id = objectDefinition.id
         this.title = objectDefinition.title;
+        this.free_shipping = json.shipping.free_shipping;
         this.price = objectDefinition.price;
+        this.condition = json.condition;
         this.picture = objectDefinition.picture;
+        this.category = json.category_id;
     }
 }
 
@@ -23,4 +26,17 @@ export class ProductListResponse {
     }
 }
 
-export class ProductDetails extends Product {}
+export class ProductDetails extends Product {
+    constructor(objectDefinition) {
+        super(objectDefinition);
+        this.description = json.description;
+        this.sold_quantity = json.sold_quantity;
+    }
+}
+
+export class ProductDetailResponse {
+    constructor(response) {
+        this.author = response.author;
+        this.item = new ProductDetails(response.item);
+    }
+}
